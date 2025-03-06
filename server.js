@@ -14,14 +14,23 @@ app.use(cors());
 app.use(helmet());
 app.use(compression());
 
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/checklists', require('./routes/checklists'));
-app.use('/api/audits', require('./routes/audits'));
-app.use('/api/reports', require('./routes/reports'));
-app.use('/api/notifications', require('./routes/notifications'));
+// Importación correcta de rutas
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/users');
+const checklistRoutes = require('./routes/checklists');
+const auditRoutes = require('./routes/audits');
+const reportRoutes = require('./routes/reports');
+const notificationRoutes = require('./routes/notifications');
+
+// Uso correcto de rutas
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/checklists', checklistRoutes);
+app.use('/api/audits', auditRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 app.get('/', (req, res) => res.send('API AuditMaster Pro funcionando'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
